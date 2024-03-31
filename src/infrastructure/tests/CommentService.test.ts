@@ -1,5 +1,5 @@
 import { CommentService } from "../../core/services/CommentServices/CommentServices";
-import { CommentRepository } from "../../core/repositories/CommentRepository/CommentRepository";
+import { CommentRepository } from "../../core/repositories/CommentRepository/ICommentRepository";
 import { AddCommentDto, UpdateCommentDto } from "../../core/repositories/CommentRepository/CommentDto";
 import { Comment } from "../../core/models/Comment/Comment";
 

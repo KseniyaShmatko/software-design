@@ -1,4 +1,4 @@
-import { ParticipantRepository } from "../../repositories/ParticipantRepository/ParticipantRepository"; 
+import { ParticipantRepository } from "../../repositories/ParticipantRepository/IParticipantRepository"; 
 import { AddParticipantDto, UpdateParticipantDto } from "../../repositories/ParticipantRepository/ParticipantDto";
 
 export class ParticipantService {

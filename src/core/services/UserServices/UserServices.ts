@@ -1,8 +1,7 @@
-import { UserRepository } from "../../repositories/UserRepository/UserRepository";
+import { UserRepository } from "../../repositories/UserRepository/IUserRepository";
 import { AddUserDto, UpdateUserDto, UserDto } from "../../repositories/UserRepository/UserDto";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
-import * as dotenv from 'dotenv';
 
 export class UserService {
     constructor (readonly userRepository: UserRepository ) {}

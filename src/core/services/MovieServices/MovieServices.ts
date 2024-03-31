@@ -1,7 +1,8 @@
-import { MovieRepository } from "../../repositories/MovieRepository/MovieRepository";
+import { MovieRepository } from "../../repositories/MovieRepository/IMovieRepository";
+import { movieRepositorySQL } from "../../repositories/MovieRepository/MovieRepository";
 import { AddMovieDto, UpdateMovieDto } from "../../repositories/MovieRepository/MovieDto";
 
-export class MovieService {
+class MovieService {
     constructor (readonly movieRepository: MovieRepository) {};
 
     async getById(id: number) {
@@ -40,9 +41,9 @@ export class MovieService {
         }
     }
 
-    async update(dto: UpdateMovieDto) {
+    async update(dto: UpdateMovieDto, id: number) {
         try {
-            return await this.movieRepository.update(dto);
+            return await this.movieRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating movie: ${error}`);
             return null;
@@ -58,3 +59,6 @@ export class MovieService {
         }
     }
 };
+
+const movieService = new MovieService(movieRepositorySQL);
+export { movieService, MovieService };

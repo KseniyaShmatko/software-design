@@ -1,5 +1,5 @@
 import { GenreService } from "../../core/services/GenreServices/GenreServices";
-import { GenreRepository } from "../../core/repositories/GenreRepository/GenreRepository";
+import { GenreRepository } from "../../core/repositories/GenreRepository/IGenreRepository";
 import { AddGenreDto, UpdateGenreDto } from "../../core/repositories/GenreRepository/GenreDto";
 import { Genre } from "../../core/models/Genre/Genre";
 

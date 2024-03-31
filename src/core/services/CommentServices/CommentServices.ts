@@ -1,4 +1,4 @@
-import { CommentRepository } from "../../repositories/CommentRepository/CommentRepository";
+import { CommentRepository } from "../../repositories/CommentRepository/ICommentRepository";
 import { AddCommentDto, UpdateCommentDto } from "../../repositories/CommentRepository/CommentDto";
 
 export class CommentService {

@@ -1,5 +1,5 @@
-import { MovieService } from "../../core/services/MovieServices/MovieServices";
-import { MovieRepository } from "../../core/repositories/MovieRepository/MovieRepository";
+import {MovieService} from "../../core/services/MovieServices/MovieServices";
+import { MovieRepository } from "../../core/repositories/MovieRepository/IMovieRepository";
 import { AddMovieDto, UpdateMovieDto } from "../../core/repositories/MovieRepository/MovieDto";
 import { Movie } from "../../core/models/Movie/Movie";
 
@@ -30,7 +30,7 @@ describe('MovieService', () => {
             trailer: 'trailer.mp4',
         };
 
-        mockMovieRepository.getById.mockReturnValueOnce(expectedMovie);
+        mockMovieRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovie));
 
         const result = await movieService.getById(1);
 
@@ -49,7 +49,7 @@ describe('MovieService', () => {
             trailer: 'trailer.mp4',
         };
 
-        mockMovieRepository.getByName.mockReturnValueOnce(expectedMovie);
+        mockMovieRepository.getByName.mockReturnValueOnce(Promise.resolve(expectedMovie));
 
         const result = await movieService.getByName('Test Movie');
 
@@ -79,7 +79,7 @@ describe('MovieService', () => {
         },
     ];
 
-    mockMovieRepository.getAll.mockReturnValueOnce(expectedMovies);
+    mockMovieRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovies));
 
     const result = await movieService.getAll();
 
@@ -103,7 +103,7 @@ describe('MovieService', () => {
             ...movieDto,
         };
 
-        mockMovieRepository.add.mockReturnValueOnce(expectedMovie);
+        mockMovieRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovie));
 
         const result = await movieService.add(movieDto);
 
@@ -126,12 +126,12 @@ describe('MovieService', () => {
             ...movieDto,
         };
 
-        mockMovieRepository.update.mockReturnValueOnce(expectedMovie);
+        mockMovieRepository.update.mockReturnValueOnce(Promise.resolve(expectedMovie));
     
-        const result = await movieService.update(movieDto);
+        const result = await movieService.update(movieDto, expectedMovie.id);
     
         expect(result).toEqual(expectedMovie);
-        expect(mockMovieRepository.update).toHaveBeenCalledWith(movieDto);
+        expect(mockMovieRepository.update).toHaveBeenCalledWith(movieDto, expectedMovie.id);
     });
 
     it('should delete a movie by id', async () => {
@@ -208,7 +208,7 @@ describe('MovieService Errors', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await movieService.update({ name: 'Updated Movie', description: 'Updated Description', country: 'Updated Country', release: new Date(), photo: 'updated_photo.jpg', trailer: 'updated_trailer.mp4' });
+        const result = await movieService.update({ name: 'Updated Movie', description: 'Updated Description', country: 'Updated Country', release: new Date(), photo: 'updated_photo.jpg', trailer: 'updated_trailer.mp4' }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating movie: Error: ${errorMessage}`);

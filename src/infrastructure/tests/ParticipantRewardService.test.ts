@@ -1,5 +1,5 @@
 import { ParticipantRewardService } from "../../core/services/RelationServices/ParticipantRewardServices";
-import { ParticipantRewardRepository } from "../../core/repositories/RelationRepository/ParticipantRewardRepository";
+import { ParticipantRewardRepository } from "../../core/repositories/RelationRepository/IParticipantRewardRepository";
 import { AddParticipantRewardDto } from "../../core/repositories/RelationRepository/ParticipantRewardDto";
 import { ParticipantReward } from "../../core/models/Relation/ParticipantReward";
 

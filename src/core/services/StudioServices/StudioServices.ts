@@ -1,4 +1,4 @@
-import { StudioRepository } from "../../repositories/StudioRepository/StudioRepository";
+import { StudioRepository } from "../../repositories/StudioRepository/IStudioRepository";
 import { AddStudioDto, UpdateStudioDto } from "../../repositories/StudioRepository/StudioDto";
 
 export class StudioService {

@@ -1,5 +1,5 @@
 import { MovieStudioService } from "../../core/services/RelationServices/MovieStudioServices";
-import { MovieStudioRepository } from "../../core/repositories/RelationRepository/MovieStudioRepository";
+import { MovieStudioRepository } from "../../core/repositories/RelationRepository/IMovieStudioRepository";
 import { AddMovieStudioDto } from "../../core/repositories/RelationRepository/MovieStudioDto";
 import { MovieStudio } from "../../core/models/Relation/MovieStudio";
 

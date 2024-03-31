@@ -1,4 +1,4 @@
-import { GenreRepository } from "../../repositories/GenreRepository/GenreRepository";
+import { GenreRepository } from "../../repositories/GenreRepository/IGenreRepository";
 import { AddGenreDto, UpdateGenreDto } from "../../repositories/GenreRepository/GenreDto";
 
 export class GenreService {

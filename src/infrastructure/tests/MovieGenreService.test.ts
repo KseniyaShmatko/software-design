@@ -1,5 +1,5 @@
 import { MovieGenreService } from "../../core/services/RelationServices/MovieGenreServices";
-import { MovieGenreRepository } from "../../core/repositories/RelationRepository/MovieGenreRepository";
+import { MovieGenreRepository } from "../../core/repositories/RelationRepository/IMovieGenreRepository";
 import { AddMovieGenreDto } from "../../core/repositories/RelationRepository/MovieGenreDto";
 import { MovieGenre } from "../../core/models/Relation/MovieGenre";
 

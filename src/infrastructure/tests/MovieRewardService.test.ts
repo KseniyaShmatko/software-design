@@ -1,5 +1,5 @@
 import { MovieRewardService } from "../../core/services/RelationServices/MovieRewardServices";
-import { MovieRewardRepository } from "../../core/repositories/RelationRepository/MovieRewardRepository";
+import { MovieRewardRepository } from "../../core/repositories/RelationRepository/IMovieRewardRepository";
 import { AddMovieRewardDto } from "../../core/repositories/RelationRepository/MovieRewardDto";
 import { MovieReward } from "../../core/models/Relation/MovieReward";
 

@@ -1,4 +1,4 @@
-import { MovieStudioRepository } from "../../repositories/RelationRepository/MovieStudioRepository";
+import { MovieStudioRepository } from "../../repositories/RelationRepository/IMovieStudioRepository";
 import { AddMovieStudioDto } from "../../repositories/RelationRepository/MovieStudioDto";
 
 export class MovieStudioService {

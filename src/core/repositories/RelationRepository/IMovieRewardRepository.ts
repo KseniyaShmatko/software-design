@@ -1,6 +1,6 @@
 import { MovieReward } from "../../models/Relation/MovieReward";
 import { AddMovieRewardDto } from "./MovieRewardDto";
-import { Repository } from "../Repository";
+import { Repository } from "../IRepository";
 
 export interface MovieRewardRepository extends Repository<MovieReward, AddMovieRewardDto> {
     getByMovieId(movie_id: number): MovieReward[];

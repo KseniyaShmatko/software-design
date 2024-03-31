@@ -1,4 +1,4 @@
-import { ParticipantRewardRepository } from "../../repositories/RelationRepository/ParticipantRewardRepository";
+import { ParticipantRewardRepository } from "../../repositories/RelationRepository/IParticipantRewardRepository";
 import { AddParticipantRewardDto } from "../../repositories/RelationRepository/ParticipantRewardDto";
 
 export class ParticipantRewardService {

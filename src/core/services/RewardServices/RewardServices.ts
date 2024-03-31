@@ -1,4 +1,4 @@
-import { RewardRepository } from "../../repositories/RewardRepository/RewardRepository";
+import { RewardRepository } from "../../repositories/RewardRepository/IRewardRepository";
 import { AddRewardDto, UpdateRewardDto } from "../../repositories/RewardRepository/RewardDto";
 
 export class RewardService {

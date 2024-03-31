@@ -1,4 +1,4 @@
-import { MovieRewardRepository } from "../../repositories/RelationRepository/MovieRewardRepository";
+import { MovieRewardRepository } from "../../repositories/RelationRepository/IMovieRewardRepository";
 import { AddMovieRewardDto } from "../../repositories/RelationRepository/MovieRewardDto";
 
 export class MovieRewardService {

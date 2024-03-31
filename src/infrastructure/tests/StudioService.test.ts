@@ -1,5 +1,5 @@
 import { StudioService } from "../../core/services/StudioServices/StudioServices";
-import { StudioRepository } from "../../core/repositories/StudioRepository/StudioRepository";
+import { StudioRepository } from "../../core/repositories/StudioRepository/IStudioRepository";
 import { AddStudioDto, UpdateStudioDto } from "../../core/repositories/StudioRepository/StudioDto";
 import { Studio } from "../../core/models/Studio/Studio";
 

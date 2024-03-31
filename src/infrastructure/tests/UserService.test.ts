@@ -1,5 +1,5 @@
 import { UserService } from "../../core/services/UserServices/UserServices";
-import { UserRepository } from "../../core/repositories/UserRepository/UserRepository";
+import { UserRepository } from "../../core/repositories/UserRepository/IUserRepository";
 import { AddUserDto, UpdateUserDto } from "../../core/repositories/UserRepository/UserDto";
 import { User } from "../../core/models/User/User";
 

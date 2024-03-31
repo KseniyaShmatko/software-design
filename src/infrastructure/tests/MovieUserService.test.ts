@@ -1,5 +1,5 @@
 import { MovieUserService } from "../../core/services/RelationServices/MovieUserServices";
-import { MovieUserRepository } from "../../core/repositories/RelationRepository/MovieUserRepository";
+import { MovieUserRepository } from "../../core/repositories/RelationRepository/IMovieUserRepository";
 import { AddMovieUserDto, UpdateMovieUserDto } from "../../core/repositories/RelationRepository/MovieUserDto";
 import { MovieUser } from "../../core/models/Relation/MovieUser";
 

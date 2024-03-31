@@ -1,6 +1,6 @@
 import { MovieUser } from "../../models/Relation/MovieUser";
 import { AddMovieUserDto, UpdateMovieUserDto} from "./MovieUserDto";
-import { Repository } from "../Repository";
+import { Repository } from "../IRepository";
 
 export interface MovieUserRepository extends Repository<MovieUser, AddMovieUserDto> {
     getByMovieId(movie_id: number): MovieUser[];

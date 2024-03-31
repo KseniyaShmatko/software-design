@@ -1,5 +1,5 @@
 import { ParticipantService } from "../../core/services/ParticipantServices/ParticipantServices";
-import { ParticipantRepository } from "../../core/repositories/ParticipantRepository/ParticipantRepository";
+import { ParticipantRepository } from "../../core/repositories/ParticipantRepository/IParticipantRepository";
 import { AddParticipantDto, UpdateParticipantDto } from "../../core/repositories/ParticipantRepository/ParticipantDto";
 import { Participant } from "../../core/models/Participant/Participant";
 

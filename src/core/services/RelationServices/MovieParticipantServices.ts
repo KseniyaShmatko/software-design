@@ -1,4 +1,4 @@
-import { MovieParticipantRepository } from "../../repositories/RelationRepository/MovieParticipantRepository";
+import { MovieParticipantRepository } from "../../repositories/RelationRepository/IMovieParticipantRepository";
 import { AddMovieParticipantDto, UpdateMovieParticipantDto } from "../../repositories/RelationRepository/MovieParticipantDto";
 
 export class MovieParticipantService {

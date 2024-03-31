@@ -1,5 +1,5 @@
 import { RewardService } from "../../core/services/RewardServices/RewardServices";
-import { RewardRepository } from "../../core/repositories/RewardRepository/RewardRepository";
+import { RewardRepository } from "../../core/repositories/RewardRepository/IRewardRepository";
 import { AddRewardDto, UpdateRewardDto } from "../../core/repositories/RewardRepository/RewardDto";
 import { Reward } from "../../core/models/Reward/Reward";
 

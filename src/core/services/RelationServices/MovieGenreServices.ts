@@ -1,4 +1,4 @@
-import { MovieGenreRepository } from "../../repositories/RelationRepository/MovieGenreRepository";
+import { MovieGenreRepository } from "../../repositories/RelationRepository/IMovieGenreRepository";
 import { AddMovieGenreDto } from "../../repositories/RelationRepository/MovieGenreDto";
 
 export class MovieGenreService {

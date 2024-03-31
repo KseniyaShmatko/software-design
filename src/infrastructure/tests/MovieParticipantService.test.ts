@@ -1,5 +1,5 @@
 import { MovieParticipantService } from "../../core/services/RelationServices/MovieParticipantServices";
-import { MovieParticipantRepository } from "../../core/repositories/RelationRepository/MovieParticipantRepository";
+import { MovieParticipantRepository } from "../../core/repositories/RelationRepository/IMovieParticipantRepository";
 import { AddMovieParticipantDto, UpdateMovieParticipantDto } from "../../core/repositories/RelationRepository/MovieParticipantDto";
 import { MovieParticipant } from "../../core/models/Relation/MovieParticipant";
 
