@@ -2,11 +2,12 @@ import { Movie } from "../../models/Movie/Movie";
 import { AddMovieDto, UpdateMovieDto } from "./MovieDto";
 import { MovieRepository } from "./IMovieRepository";
 import { MovieDB } from "../../../infrastructure/db/entities/entities";
+import { Sequelize } from 'sequelize';
 
 class MovieRepositorySQL implements MovieRepository {
     async getById(id: number): Promise<Movie | null> {
         try {
-            const movieModel = await MovieDB.findOne({ where: { id } });
+            const movieModel = await MovieDB.findByPk(id);
             if (movieModel) {
                 const movieData = movieModel.toJSON();
                 return new Movie(movieData.id, movieData.name, movieData.description, movieData.country, movieData.release, movieData.photo, movieData.trailer);
@@ -53,7 +54,9 @@ class MovieRepositorySQL implements MovieRepository {
 
     async getByName(name: string): Promise<Movie | null> {
         try {
-            const movieModel = await MovieDB.findOne({ where: { name } });
+            const movieModel = await MovieDB.findOne({
+                where: Sequelize.literal(`LOWER(name) = LOWER('${name}')`)
+            });
             if (movieModel) {
                 const movie = movieModel.toJSON();
                 return new Movie(movie.id, movie.name, movie.description, movie.country, movie.release, movie.photo, movie.trailer);

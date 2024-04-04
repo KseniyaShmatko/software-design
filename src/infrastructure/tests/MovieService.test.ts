@@ -1,5 +1,5 @@
 import {MovieService} from "../../core/services/MovieServices/MovieServices";
-import { MovieRepository } from "../../core/repositories/MovieRepository/IMovieRepository";
+import { MovieRepository, MovieCategories } from "../../core/repositories/MovieRepository/IMovieRepository";
 import { AddMovieDto, UpdateMovieDto } from "../../core/repositories/MovieRepository/MovieDto";
 import { Movie } from "../../core/models/Movie/Movie";
 
@@ -58,35 +58,65 @@ describe('MovieService', () => {
     });
 
     it('should get all movies', async () => {
-    const expectedMovies: Movie[] = [
-        {
-            id: 1,
-            name: 'Test Movie 1',
-            description: 'Description 1',
-            country: 'Country 1',
-            release: new Date(),
-            photo: 'photo1.jpg',
-            trailer: 'trailer1.mp4',
-        },
-        {
-            id: 2,
-            name: 'Test Movie 2',
-            description: 'Description 2',
-            country: 'Country 2',
-            release: new Date(),
-            photo: 'photo2.jpg',
-            trailer: 'trailer2.mp4',
-        },
-    ];
-
-    mockMovieRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovies));
-
-    const result = await movieService.getAll();
-
-    expect(result).toEqual(expectedMovies);
-    expect(mockMovieRepository.getAll).toHaveBeenCalled();
+        const currentDate = new Date();
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    
+        const expectedMovies: MovieCategories = {
+            upcoming: [],
+            lastMonth: [
+                {
+                    id: 1,
+                    name: 'Test Movie 1',
+                    description: 'Description 1',
+                    country: 'Country 1',
+                    release: currentDate,
+                    photo: 'photo1.jpg',
+                    trailer: 'trailer1.mp4',
+                }
+            ],
+            lastYear: [
+                {
+                    id: 2,
+                    name: 'Test Movie 2',
+                    description: 'Description 2',
+                    country: 'Country 2',
+                    release: oneMonthAgo,
+                    photo: 'photo2.jpg',
+                    trailer: 'trailer2.mp4',
+                },
+            ],
+            other: [],
+        };
+    
+        mockMovieRepository.getAll.mockReturnValueOnce(Promise.resolve([
+            {
+                id: 1,
+                name: 'Test Movie 1',
+                description: 'Description 1',
+                country: 'Country 1',
+                release: currentDate,
+                photo: 'photo1.jpg',
+                trailer: 'trailer1.mp4',
+            },
+            {
+                id: 2,
+                name: 'Test Movie 2',
+                description: 'Description 2',
+                country: 'Country 2',
+                release: oneMonthAgo,
+                photo: 'photo2.jpg',
+                trailer: 'trailer2.mp4',
+            },
+        ]));
+    
+        const result = await movieService.getAll();
+    
+        expect(result).toEqual(expectedMovies);
+    
+        expect(mockMovieRepository.getAll).toHaveBeenCalled();
     });
-
+    
 
     it('should add a new movie', async () => {
         const movieDto: AddMovieDto = {

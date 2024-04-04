@@ -6,3 +6,10 @@ export interface MovieRepository extends Repository<Movie, AddMovieDto>{
     getByName(name: string): Promise<Movie | null>;
     update(dto: UpdateMovieDto, id: number): Promise<Movie>;
 }
+
+export type MovieCategories = {
+    upcoming: Movie[];
+    lastMonth: Movie[];
+    lastYear: Movie[];
+    other: Movie[];
+};

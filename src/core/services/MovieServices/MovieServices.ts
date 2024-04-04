@@ -1,4 +1,4 @@
-import { MovieRepository } from "../../repositories/MovieRepository/IMovieRepository";
+import { MovieRepository, MovieCategories } from "../../repositories/MovieRepository/IMovieRepository";
 import { movieRepositorySQL } from "../../repositories/MovieRepository/MovieRepository";
 import { AddMovieDto, UpdateMovieDto } from "../../repositories/MovieRepository/MovieDto";
 
@@ -23,9 +23,38 @@ class MovieService {
         }
     }
 
-    async getAll() {
+    async getAll(): Promise<MovieCategories | null> {
         try {
-            return await this.movieRepository.getAll();
+            const allMovies = await this.movieRepository.getAll();
+            if (!allMovies) return null;
+
+            const currentDate = new Date();
+            const oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+            const oneYearAgo = new Date();
+            oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+            const movieCategories: MovieCategories = {
+                upcoming: [],
+                lastMonth: [],
+                lastYear: [],
+                other: []
+            };
+
+            allMovies.forEach(movie => {
+                const releaseDate = new Date(movie.release);
+                if (releaseDate > currentDate) {
+                    movieCategories.upcoming.push(movie);
+                } else if (releaseDate > oneMonthAgo) {
+                    movieCategories.lastMonth.push(movie);
+                } else if (releaseDate > oneYearAgo) {
+                    movieCategories.lastYear.push(movie);
+                } else {
+                    movieCategories.other.push(movie);
+                }
+            });
+
+            return movieCategories;
         } catch (error) {
             console.error(`Error getting all movies: ${error}`);
             return null;

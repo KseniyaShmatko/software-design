@@ -1,7 +1,8 @@
-import { ParticipantRepository } from "../../repositories/ParticipantRepository/IParticipantRepository"; 
+import { ParticipantRepository } from "../../repositories/ParticipantRepository/IParticipantRepository";
+import { participantRepositorySQL } from "../../repositories/ParticipantRepository/ParticipantRepository";
 import { AddParticipantDto, UpdateParticipantDto } from "../../repositories/ParticipantRepository/ParticipantDto";
 
-export class ParticipantService {
+class ParticipantService {
     constructor (readonly participantRepository: ParticipantRepository ) {}
 
     async getById(id: number) {
@@ -40,9 +41,9 @@ export class ParticipantService {
         }
     }
 
-    async update(dto: UpdateParticipantDto) {
+    async update(dto: UpdateParticipantDto, id: number) {
         try {
-            return await this.participantRepository.update(dto);
+            return await this.participantRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating participant: ${error}`);
             return null;
@@ -58,3 +59,6 @@ export class ParticipantService {
         }
     }
 };
+
+const participantService = new ParticipantService(participantRepositorySQL);
+export { participantService, ParticipantService };

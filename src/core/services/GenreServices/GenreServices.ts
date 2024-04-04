@@ -1,7 +1,8 @@
 import { GenreRepository } from "../../repositories/GenreRepository/IGenreRepository";
+import { genreRepositorySQL } from "../../repositories/GenreRepository/GenreRepository";
 import { AddGenreDto, UpdateGenreDto } from "../../repositories/GenreRepository/GenreDto";
 
-export class GenreService {
+class GenreService {
     constructor (readonly genreRepository: GenreRepository ) {}
 
     async getById(id: number) {
@@ -40,9 +41,9 @@ export class GenreService {
         }
     }
 
-    async update(dto: UpdateGenreDto) {
+    async update(dto: UpdateGenreDto, id: number) {
         try {
-            return await this.genreRepository.update(dto);
+            return await this.genreRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating genre: ${error}`);
             return null;
@@ -58,3 +59,6 @@ export class GenreService {
         }
     }
 };
+
+const genreService = new GenreService(genreRepositorySQL);
+export { genreService, GenreService };

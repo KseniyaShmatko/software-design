@@ -29,7 +29,7 @@ describe('ParticipantService', () => {
             photo: 'john_doe.jpg',
         };
 
-        mockParticipantRepository.getById.mockReturnValueOnce(expectedParticipant);
+        mockParticipantRepository.getById.mockResolvedValueOnce(Promise.resolve(expectedParticipant));
 
         const result = await participantService.getById(1);
 
@@ -47,7 +47,7 @@ describe('ParticipantService', () => {
             photo: 'john_doe.jpg',
         };
 
-        mockParticipantRepository.getByNameSurname.mockReturnValueOnce(expectedParticipant);
+        mockParticipantRepository.getByNameSurname.mockResolvedValueOnce(Promise.resolve(expectedParticipant));
 
         const result = await participantService.getByNameSurname('John', 'Doe');
 
@@ -75,7 +75,7 @@ describe('ParticipantService', () => {
             },
         ];
 
-        mockParticipantRepository.getAll.mockReturnValueOnce(expectedParticipants);
+        mockParticipantRepository.getAll.mockResolvedValueOnce(Promise.resolve(expectedParticipants));
 
         const result = await participantService.getAll();
 
@@ -97,7 +97,7 @@ describe('ParticipantService', () => {
             ...participantDto,
         };
 
-        mockParticipantRepository.add.mockReturnValueOnce(expectedParticipant);
+        mockParticipantRepository.add.mockResolvedValueOnce(Promise.resolve(expectedParticipant));
 
         const result = await participantService.add(participantDto);
 
@@ -119,12 +119,12 @@ describe('ParticipantService', () => {
             ...participantDto,
         };
 
-        mockParticipantRepository.update.mockReturnValueOnce(expectedParticipant);
+        mockParticipantRepository.update.mockResolvedValueOnce(Promise.resolve(expectedParticipant));
     
-        const result = await participantService.update(participantDto);
+        const result = await participantService.update(participantDto, expectedParticipant.id);
     
         expect(result).toEqual(expectedParticipant);
-        expect(mockParticipantRepository.update).toHaveBeenCalledWith(participantDto);
+        expect(mockParticipantRepository.update).toHaveBeenCalledWith(participantDto, expectedParticipant.id);
     });
 
     it('should delete a participant by id', async () => {
@@ -213,7 +213,7 @@ describe('ParticipantService Errors', () => {
             birth: new Date('1990-01-01'),
             death: new Date('2021-01-01'),
             photo: 'updated_john_doe.jpg',
-        });
+        }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating participant: Error: ${errorMessage}`);

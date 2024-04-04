@@ -26,7 +26,7 @@ describe('GenreService', () => {
             description: 'Description',
         };
 
-        mockGenreRepository.getById.mockReturnValueOnce(expectedGenre);
+        mockGenreRepository.getById.mockReturnValueOnce(Promise.resolve(expectedGenre));
 
         const result = await genreService.getById(1);
 
@@ -41,7 +41,7 @@ describe('GenreService', () => {
             description: 'Description',
         };
 
-        mockGenreRepository.getByName.mockReturnValueOnce(expectedGenre);
+        mockGenreRepository.getByName.mockReturnValueOnce(Promise.resolve(expectedGenre));
 
         const result = await genreService.getByName('Test Genre');
 
@@ -63,7 +63,7 @@ describe('GenreService', () => {
             },
         ];
 
-        mockGenreRepository.getAll.mockReturnValueOnce(expectedGenres);
+        mockGenreRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedGenres));
 
         const result = await genreService.getAll();
 
@@ -83,7 +83,7 @@ describe('GenreService', () => {
             ...genreDto,
         };
 
-        mockGenreRepository.add.mockReturnValueOnce(expectedGenre);
+        mockGenreRepository.add.mockReturnValueOnce(Promise.resolve(expectedGenre));
 
         const result = await genreService.add(genreDto);
 
@@ -102,12 +102,12 @@ describe('GenreService', () => {
             ...genreDto,
         };
 
-        mockGenreRepository.update.mockReturnValueOnce(expectedGenre);
+        mockGenreRepository.update.mockReturnValueOnce(Promise.resolve(expectedGenre));
     
-        const result = await genreService.update(genreDto);
+        const result = await genreService.update(genreDto, expectedGenre.id);
     
         expect(result).toEqual(expectedGenre);
-        expect(mockGenreRepository.update).toHaveBeenCalledWith(genreDto);
+        expect(mockGenreRepository.update).toHaveBeenCalledWith(genreDto, expectedGenre.id);
     });
 
     it('should delete a genre by id', async () => {
