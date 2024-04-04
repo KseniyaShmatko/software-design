@@ -3,6 +3,6 @@ import { AddStudioDto, UpdateStudioDto } from "./StudioDto";
 import { Repository } from "../IRepository";
 
 export interface StudioRepository extends Repository<Studio, AddStudioDto> {
-    getByName(name: string): Studio | null;
-    update(dto: UpdateStudioDto): Studio;
+    getByName(name: string): Promise<Studio | null>;
+    update(dto: UpdateStudioDto, id:number): Promise<Studio>;
 }

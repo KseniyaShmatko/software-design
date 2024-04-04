@@ -29,7 +29,7 @@ describe('StudioService', () => {
             photo: 'photo.jpg',
         };
 
-        mockStudioRepository.getById.mockReturnValueOnce(expectedStudio);
+        mockStudioRepository.getById.mockReturnValueOnce(Promise.resolve(expectedStudio));
 
         const result = await studioService.getById(1);
 
@@ -47,7 +47,7 @@ describe('StudioService', () => {
             photo: 'photo.jpg',
         };
 
-        mockStudioRepository.getByName.mockReturnValueOnce(expectedStudio);
+        mockStudioRepository.getByName.mockReturnValueOnce(Promise.resolve(expectedStudio));
 
         const result = await studioService.getByName('Test Studio');
 
@@ -75,7 +75,7 @@ describe('StudioService', () => {
             },
         ];
 
-        mockStudioRepository.getAll.mockReturnValueOnce(expectedStudios);
+        mockStudioRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedStudios));
 
         const result = await studioService.getAll();
 
@@ -98,7 +98,7 @@ describe('StudioService', () => {
             ...studioDto,
         };
 
-        mockStudioRepository.add.mockReturnValueOnce(expectedStudio);
+        mockStudioRepository.add.mockReturnValueOnce(Promise.resolve(expectedStudio));
 
         const result = await studioService.add(studioDto);
 
@@ -120,12 +120,12 @@ describe('StudioService', () => {
             ...studioDto,
         };
 
-        mockStudioRepository.update.mockReturnValueOnce(expectedStudio);
+        mockStudioRepository.update.mockReturnValueOnce(Promise.resolve(expectedStudio));
     
-        const result = await studioService.update(studioDto);
+        const result = await studioService.update(studioDto, expectedStudio.id);
     
         expect(result).toEqual(expectedStudio);
-        expect(mockStudioRepository.update).toHaveBeenCalledWith(studioDto);
+        expect(mockStudioRepository.update).toHaveBeenCalledWith(studioDto, expectedStudio.id);
     });
 
     it('should delete a studio by id', async () => {
@@ -202,7 +202,7 @@ describe('StudioService Errors', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await studioService.update({ name: 'Updated Studio', founder: 'Updated Founder', country: 'Updated Country', foundation: new Date(), photo: 'updated_photo.jpg' });
+        const result = await studioService.update({ name: 'Updated Studio', founder: 'Updated Founder', country: 'Updated Country', foundation: new Date(), photo: 'updated_photo.jpg' }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating studio: Error: ${errorMessage}`);

@@ -27,7 +27,7 @@ describe('RewardService', () => {
             photo: 'photo.jpg',
         };
 
-        mockRewardRepository.getById.mockReturnValueOnce(expectedReward);
+        mockRewardRepository.getById.mockReturnValueOnce(Promise.resolve(expectedReward));
 
         const result = await rewardService.getById(1);
 
@@ -43,7 +43,7 @@ describe('RewardService', () => {
             photo: 'photo.jpg',
         };
 
-        mockRewardRepository.getByName.mockReturnValueOnce(expectedReward);
+        mockRewardRepository.getByName.mockReturnValueOnce(Promise.resolve(expectedReward));
 
         const result = await rewardService.getByName('Test Reward');
 
@@ -67,7 +67,7 @@ describe('RewardService', () => {
             },
         ];
 
-        mockRewardRepository.getAll.mockReturnValueOnce(expectedRewards);
+        mockRewardRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedRewards));
 
         const result = await rewardService.getAll();
 
@@ -88,7 +88,7 @@ describe('RewardService', () => {
             ...rewardDto,
         };
 
-        mockRewardRepository.add.mockReturnValueOnce(expectedReward);
+        mockRewardRepository.add.mockReturnValueOnce(Promise.resolve(expectedReward));
 
         const result = await rewardService.add(rewardDto);
 
@@ -108,12 +108,12 @@ describe('RewardService', () => {
             ...rewardDto,
         };
 
-        mockRewardRepository.update.mockReturnValueOnce(expectedReward);
+        mockRewardRepository.update.mockReturnValueOnce(Promise.resolve(expectedReward));
     
-        const result = await rewardService.update(rewardDto);
+        const result = await rewardService.update(rewardDto, expectedReward.id);
     
         expect(result).toEqual(expectedReward);
-        expect(mockRewardRepository.update).toHaveBeenCalledWith(rewardDto);
+        expect(mockRewardRepository.update).toHaveBeenCalledWith(rewardDto, expectedReward.id);
     });
 
     it('should delete a reward by id', async () => {
@@ -190,7 +190,7 @@ describe('RewardService Errors', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await rewardService.update({ name: 'Updated Reward', description: 'Updated Description', photo: 'updated_photo.jpg' });
+        const result = await rewardService.update({ name: 'Updated Reward', description: 'Updated Description', photo: 'updated_photo.jpg' }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating reward: Error: ${errorMessage}`);

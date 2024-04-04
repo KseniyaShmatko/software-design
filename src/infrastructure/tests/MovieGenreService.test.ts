@@ -26,7 +26,7 @@ describe('MovieGenreService', () => {
             genre_id: 1,
         };
 
-        mockMovieGenreRepository.getById.mockReturnValueOnce(expectedMovieGenre);
+        mockMovieGenreRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovieGenre));
 
         const result = await movieGenreService.getById(1);
 
@@ -48,7 +48,7 @@ describe('MovieGenreService', () => {
             }
         ];
 
-        mockMovieGenreRepository.getByMovieId.mockReturnValueOnce(expectedMovieGenres);
+        mockMovieGenreRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedMovieGenres));
 
         const result = await movieGenreService.getByMovieId(1);
 
@@ -70,7 +70,7 @@ describe('MovieGenreService', () => {
             }
         ];
 
-        mockMovieGenreRepository.getByGenreId.mockReturnValueOnce(expectedMovieGenres);
+        mockMovieGenreRepository.getByGenreId.mockReturnValueOnce(Promise.resolve(expectedMovieGenres));
 
         const result = await movieGenreService.getByGenreId(1);
 
@@ -92,7 +92,7 @@ describe('MovieGenreService', () => {
             }
         ];
 
-        mockMovieGenreRepository.getAll.mockReturnValueOnce(expectedMovieGenres);
+        mockMovieGenreRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovieGenres));
 
         const result = await movieGenreService.getAll();
 
@@ -111,7 +111,7 @@ describe('MovieGenreService', () => {
             ...movieGenreDto,
         };
 
-        mockMovieGenreRepository.add.mockReturnValueOnce(expectedMovieGenre);
+        mockMovieGenreRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovieGenre));
 
         const result = await movieGenreService.add(movieGenreDto);
 

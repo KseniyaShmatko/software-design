@@ -1,7 +1,8 @@
 import { RewardRepository } from "../../repositories/RewardRepository/IRewardRepository";
+import { rewardRepositorySQL } from "../../repositories/RewardRepository/RewardRepository";
 import { AddRewardDto, UpdateRewardDto } from "../../repositories/RewardRepository/RewardDto";
 
-export class RewardService {
+class RewardService {
     constructor (readonly rewardRepository: RewardRepository ) {}
 
     async getById(id: number) {
@@ -40,9 +41,9 @@ export class RewardService {
         }
     }
 
-    async update(dto: UpdateRewardDto) {
+    async update(dto: UpdateRewardDto, id: number) {
         try {
-            return await this.rewardRepository.update(dto);
+            return await this.rewardRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating reward: ${error}`);
             return null;
@@ -58,3 +59,6 @@ export class RewardService {
         }
     }
 };
+
+const rewardService = new RewardService(rewardRepositorySQL);
+export { rewardService, RewardService };

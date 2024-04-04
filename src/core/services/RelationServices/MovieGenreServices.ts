@@ -1,7 +1,8 @@
 import { MovieGenreRepository } from "../../repositories/RelationRepository/IMovieGenreRepository";
+import { movieGenreRepositorySQL } from "../../repositories/RelationRepository/MovieGenreRepository";
 import { AddMovieGenreDto } from "../../repositories/RelationRepository/MovieGenreDto";
 
-export class MovieGenreService {
+class MovieGenreService {
     constructor (readonly movieGenreRepository: MovieGenreRepository ) {}
 
     async getById(id: number) {
@@ -58,3 +59,6 @@ export class MovieGenreService {
         }
     }
 };
+
+const movieGenreService = new MovieGenreService(movieGenreRepositorySQL);
+export { movieGenreService, MovieGenreService };

@@ -29,7 +29,7 @@ describe('CommentService', () => {
             user_id: 1,
         };
 
-        mockCommentRepository.getById.mockReturnValueOnce(expectedComment);
+        mockCommentRepository.getById.mockReturnValueOnce(Promise.resolve(expectedComment));
 
         const result = await commentService.getById(1);
 
@@ -55,7 +55,7 @@ describe('CommentService', () => {
             },
         ];
 
-        mockCommentRepository.getByMovieId.mockReturnValueOnce(expectedComments);
+        mockCommentRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedComments));
 
         const result = await commentService.getByMovieId(1);
 
@@ -81,7 +81,7 @@ describe('CommentService', () => {
             },
         ];
 
-        mockCommentRepository.getByUserId.mockReturnValueOnce(expectedComments);
+        mockCommentRepository.getByUserId.mockReturnValueOnce(Promise.resolve(expectedComments));
 
         const result = await commentService.getByUserId(1);
 
@@ -107,7 +107,7 @@ describe('CommentService', () => {
             },
         ];
 
-        mockCommentRepository.getAll.mockReturnValueOnce(expectedComments);
+        mockCommentRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedComments));
 
         const result = await commentService.getAll();
 
@@ -130,7 +130,7 @@ describe('CommentService', () => {
             user_id: 1,
         };
 
-        mockCommentRepository.add.mockReturnValueOnce(expectedComment);
+        mockCommentRepository.add.mockReturnValueOnce(Promise.resolve(expectedComment));
 
         const result = await commentService.add(commentDto);
 
@@ -151,12 +151,12 @@ describe('CommentService', () => {
             user_id: 1,
         };
 
-        mockCommentRepository.update.mockReturnValueOnce(expectedComment);
+        mockCommentRepository.update.mockReturnValueOnce(Promise.resolve(expectedComment));
     
-        const result = await commentService.update(commentDto);
+        const result = await commentService.update(commentDto, expectedComment.id);
     
         expect(result).toEqual(expectedComment);
-        expect(mockCommentRepository.update).toHaveBeenCalledWith(commentDto);
+        expect(mockCommentRepository.update).toHaveBeenCalledWith(commentDto, expectedComment.id);
     });
 
     it('should delete a comment by id', async () => {
@@ -245,7 +245,7 @@ describe('CommentService Errors', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await commentService.update({ content: 'Updated Comment', date: new Date() });
+        const result = await commentService.update({ content: 'Updated Comment', date: new Date() }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating comment: Error: ${errorMessage}`);

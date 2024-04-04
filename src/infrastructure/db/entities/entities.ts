@@ -156,4 +156,10 @@ export {
   GenreDB, 
   UserDB, 
   CommentDB,
+  MovieGenreDB,
+  MovieParticipantDB,
+  MovieRewardDB,
+  MovieStudioDB,
+  MovieUserDB,
+  ParticipantRewardDB
 };

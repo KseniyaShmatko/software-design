@@ -1,7 +1,8 @@
 import { CommentRepository } from "../../repositories/CommentRepository/ICommentRepository";
+import { commentRepositorySQL } from "../../repositories/CommentRepository/CommentRepository";
 import { AddCommentDto, UpdateCommentDto } from "../../repositories/CommentRepository/CommentDto";
 
-export class CommentService {
+class CommentService {
     constructor (readonly commentRepository: CommentRepository ) {}
 
     async getById(id: number) {
@@ -49,9 +50,9 @@ export class CommentService {
         }
     }
 
-    async update(dto: UpdateCommentDto) {
+    async update(dto: UpdateCommentDto, id: number) {
         try {
-            return await this.commentRepository.update(dto);
+            return await this.commentRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating comment: ${error}`);
             return null;
@@ -67,3 +68,6 @@ export class CommentService {
         }
     }
 };
+
+const commentService = new CommentService(commentRepositorySQL);
+export { commentService, CommentService };

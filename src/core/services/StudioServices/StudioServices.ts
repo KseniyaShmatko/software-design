@@ -1,7 +1,8 @@
 import { StudioRepository } from "../../repositories/StudioRepository/IStudioRepository";
+import { studioRepositorySQL } from "../../repositories/StudioRepository/StudioRepository";
 import { AddStudioDto, UpdateStudioDto } from "../../repositories/StudioRepository/StudioDto";
 
-export class StudioService {
+class StudioService {
     constructor (readonly studioRepository: StudioRepository ) {}
 
     async getById(id: number) {
@@ -40,9 +41,9 @@ export class StudioService {
         }
     }
 
-    async update(dto: UpdateStudioDto) {
+    async update(dto: UpdateStudioDto, id: number) {
         try {
-            return await this.studioRepository.update(dto);
+            return await this.studioRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating studio: ${error}`);
             return null;
@@ -58,3 +59,6 @@ export class StudioService {
         }
     }
 };
+
+const studioService = new StudioService(studioRepositorySQL);
+export { studioService, StudioService };
