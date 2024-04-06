@@ -1,7 +1,8 @@
 import { MovieParticipantRepository } from "../../repositories/RelationRepository/IMovieParticipantRepository";
+import { movieParticipantRepositorySQL } from "../../repositories/RelationRepository/MovieParticipantRepository";
 import { AddMovieParticipantDto, UpdateMovieParticipantDto } from "../../repositories/RelationRepository/MovieParticipantDto";
 
-export class MovieParticipantService {
+class MovieParticipantService {
     constructor (readonly movieParticipantRepository: MovieParticipantRepository ) {}
 
     async getById(id: number) {
@@ -49,9 +50,9 @@ export class MovieParticipantService {
         }
     }
     
-    async update(dto: UpdateMovieParticipantDto) {
+    async update(dto: UpdateMovieParticipantDto, id: number) {
         try {
-            return await this.movieParticipantRepository.update(dto);
+            return await this.movieParticipantRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating movieParticipant: ${error}`);
             return null;
@@ -68,3 +69,6 @@ export class MovieParticipantService {
         }
     }
 };
+
+const movieParticipantService = new MovieParticipantService(movieParticipantRepositorySQL);
+export { movieParticipantService, MovieParticipantService };

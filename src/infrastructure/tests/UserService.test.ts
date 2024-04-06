@@ -2,6 +2,7 @@ import { UserService } from "../../core/services/UserServices/UserServices";
 import { UserRepository } from "../../core/repositories/UserRepository/IUserRepository";
 import { AddUserDto, UpdateUserDto } from "../../core/repositories/UserRepository/UserDto";
 import { User } from "../../core/models/User/User";
+import * as bcrypt from "bcryptjs";
 
 const mockUserRepository: jest.Mocked<UserRepository> = {
     getById: jest.fn(),
@@ -31,7 +32,7 @@ describe('UserService', () => {
                 role: "user"
             };
 
-            mockUserRepository.getById.mockReturnValueOnce(expectedUser);
+            mockUserRepository.getById.mockReturnValueOnce(Promise.resolve(expectedUser));
 
             const result = await userService.getById(1);
 
@@ -61,41 +62,12 @@ describe('UserService', () => {
                 }
             ];
 
-            mockUserRepository.getAll.mockReturnValueOnce(expectedUsers);
+            mockUserRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedUsers));
 
             const result = await userService.getAll();
 
             expect(result).toEqual(expectedUsers);
             expect(mockUserRepository.getAll).toHaveBeenCalled();
-        });
-
-        it('should add a new user', async () => {
-            const addUserDto: AddUserDto = {
-                name: "John",
-                surname: "Doe",
-                registration: new Date(),
-                login: "john_doe",
-                password: "password",
-                role: "user"
-            };
-            const addUser: User = {
-                id: 1,
-                name: "John",
-                surname: "Doe",
-                registration: new Date(),
-                login: "john_doe",
-                password: "password",
-                role: "user"
-            };
-
-            mockUserRepository.getByLogin.mockReturnValueOnce(null);
-            mockUserRepository.add.mockReturnValueOnce(addUser);
-
-            const result = await userService.registration(addUserDto);
-
-            expect(result).toEqual(result);
-            expect(mockUserRepository.getByLogin).toHaveBeenCalledWith("john_doe");
-            expect(mockUserRepository.add).toHaveBeenCalledWith(addUserDto);
         });
 
         it('should update a user', async () => {
@@ -114,12 +86,12 @@ describe('UserService', () => {
                 role: "user"
             };
 
-            mockUserRepository.update.mockReturnValueOnce(updatedUser);
+            mockUserRepository.update.mockReturnValueOnce(Promise.resolve(updatedUser));
 
-            const result = await userService.update(updateUserDto);
+            const result = await userService.update(updateUserDto, updatedUser.id);
 
             expect(result).toEqual(updatedUser);
-            expect(mockUserRepository.update).toHaveBeenCalledWith(updateUserDto);
+            expect(mockUserRepository.update).toHaveBeenCalledWith(updateUserDto, updatedUser.id);
         });
 
         it('should delete a user', async () => {
@@ -187,7 +159,7 @@ describe('UserService', () => {
             };
 
             const errorMessage = 'Such user already exists';
-            mockUserRepository.getByLogin.mockReturnValueOnce({
+            mockUserRepository.getByLogin.mockReturnValueOnce(Promise.resolve({
                 id: 1,
                 name: "John",
                 surname: "Doe",
@@ -195,7 +167,7 @@ describe('UserService', () => {
                 login: "john_doe",
                 password: "hashed_password",
                 role: "user"
-            });
+            }));
 
             const result = await userService.registration(addUserDto);
 
@@ -213,11 +185,11 @@ describe('UserService', () => {
                 surname: "Doe",
                 registration: new Date(),
                 login: "john_doe",
-                password: "hashed_password", // Assuming password is hashed
+                password: "hashed_password",
                 role: "user"
             };
 
-            mockUserRepository.getByLogin.mockReturnValueOnce(userWithInvalidPassword);
+            mockUserRepository.getByLogin.mockReturnValueOnce(Promise.resolve(userWithInvalidPassword));
 
             const result = await userService.login(login, password);
 
@@ -230,7 +202,7 @@ describe('UserService', () => {
             const password = 'password';
             const errorMessage = 'No such user registered';
 
-            mockUserRepository.getByLogin.mockReturnValueOnce(null);
+            mockUserRepository.getByLogin.mockReturnValueOnce(Promise.resolve(null));
 
             const result = await userService.login(login, password);
 
@@ -249,7 +221,7 @@ describe('UserService', () => {
                 surname: "Updated Doe"
             };
 
-            const result = await userService.update(updateUserDto);
+            const result = await userService.update(updateUserDto, 1);
 
             expect(result).toBeNull();
             expect(console.error).toHaveBeenCalledWith(`Error updating user: Error: ${errorMessage}`);

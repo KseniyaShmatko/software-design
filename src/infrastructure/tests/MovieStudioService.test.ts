@@ -26,7 +26,7 @@ describe('MovieStudioService', () => {
             studio_id: 1,
         };
 
-        mockMovieStudioRepository.getById.mockReturnValueOnce(expectedMovieStudio);
+        mockMovieStudioRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovieStudio));
 
         const result = await movieStudioService.getById(1);
 
@@ -48,7 +48,7 @@ describe('MovieStudioService', () => {
             }
         ];
 
-        mockMovieStudioRepository.getByMovieId.mockReturnValueOnce(expectedMovieStudios);
+        mockMovieStudioRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedMovieStudios));
 
         const result = await movieStudioService.getByMovieId(1);
 
@@ -70,7 +70,7 @@ describe('MovieStudioService', () => {
             }
         ];
 
-        mockMovieStudioRepository.getByStudioId.mockReturnValueOnce(expectedMovieStudios);
+        mockMovieStudioRepository.getByStudioId.mockReturnValueOnce(Promise.resolve(expectedMovieStudios));
 
         const result = await movieStudioService.getByStudioId(1);
 
@@ -92,7 +92,7 @@ describe('MovieStudioService', () => {
             }
         ];
 
-        mockMovieStudioRepository.getAll.mockReturnValueOnce(expectedMovieStudios);
+        mockMovieStudioRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovieStudios));
 
         const result = await movieStudioService.getAll();
 
@@ -111,7 +111,7 @@ describe('MovieStudioService', () => {
             ...movieStudioDto,
         };
 
-        mockMovieStudioRepository.add.mockReturnValueOnce(expectedMovieStudio);
+        mockMovieStudioRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovieStudio));
 
         const result = await movieStudioService.add(movieStudioDto);
 

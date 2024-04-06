@@ -28,7 +28,7 @@ describe('MovieParticipantService', () => {
             role: 'Actor',
         };
 
-        mockMovieParticipantRepository.getById.mockReturnValueOnce(expectedMovieParticipant);
+        mockMovieParticipantRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovieParticipant));
 
         const result = await movieParticipantService.getById(1);
 
@@ -52,7 +52,7 @@ describe('MovieParticipantService', () => {
             }
         ];
 
-        mockMovieParticipantRepository.getByMovieId.mockReturnValueOnce(expectedMovieParticipants);
+        mockMovieParticipantRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedMovieParticipants));
 
         const result = await movieParticipantService.getByMovieId(1);
 
@@ -76,7 +76,7 @@ describe('MovieParticipantService', () => {
             }
         ];
 
-        mockMovieParticipantRepository.getByParticipantId.mockReturnValueOnce(expectedMovieParticipants);
+        mockMovieParticipantRepository.getByParticipantId.mockReturnValueOnce(Promise.resolve(expectedMovieParticipants));
 
         const result = await movieParticipantService.getByParticipantId(1);
 
@@ -100,7 +100,7 @@ describe('MovieParticipantService', () => {
             }
         ];
 
-        mockMovieParticipantRepository.getAll.mockReturnValueOnce(expectedMovieParticipants);
+        mockMovieParticipantRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovieParticipants));
 
         const result = await movieParticipantService.getAll();
 
@@ -122,7 +122,7 @@ describe('MovieParticipantService', () => {
             role: movieParticipantDto.role,
         };
 
-        mockMovieParticipantRepository.add.mockReturnValueOnce(expectedMovieParticipant);
+        mockMovieParticipantRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovieParticipant));
 
         const result = await movieParticipantService.add({ ...movieParticipantDto, movie_id: 1, participant_id: 1 });
 
@@ -142,12 +142,12 @@ describe('MovieParticipantService', () => {
             role: movieParticipantDto.role,
         };
 
-        mockMovieParticipantRepository.update.mockReturnValueOnce(expectedMovieParticipant);
+        mockMovieParticipantRepository.update.mockReturnValueOnce(Promise.resolve(expectedMovieParticipant));
 
-        const result = await movieParticipantService.update(movieParticipantDto);
+        const result = await movieParticipantService.update(movieParticipantDto, expectedMovieParticipant.id);
 
         expect(result).toEqual(expectedMovieParticipant);
-        expect(mockMovieParticipantRepository.update).toHaveBeenCalledWith(movieParticipantDto);
+        expect(mockMovieParticipantRepository.update).toHaveBeenCalledWith(movieParticipantDto, expectedMovieParticipant.id);
     });
 
     it('should delete a movieParticipant by id', async () => {
@@ -236,7 +236,7 @@ describe('MovieParticipantService Negative Tests', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await movieParticipantService.update({ role: 'Actor' });
+        const result = await movieParticipantService.update({ role: 'Actor' }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating movieParticipant: Error: ${errorMessage}`);

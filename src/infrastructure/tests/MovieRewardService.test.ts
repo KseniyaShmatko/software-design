@@ -26,7 +26,7 @@ describe('MovieRewardService', () => {
             reward_id: 1,
         };
 
-        mockMovieRewardRepository.getById.mockReturnValueOnce(expectedMovieReward);
+        mockMovieRewardRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovieReward));
 
         const result = await movieRewardService.getById(1);
 
@@ -48,7 +48,7 @@ describe('MovieRewardService', () => {
             }
         ];
 
-        mockMovieRewardRepository.getByMovieId.mockReturnValueOnce(expectedMovieRewards);
+        mockMovieRewardRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedMovieRewards));
 
         const result = await movieRewardService.getByMovieId(1);
 
@@ -70,7 +70,7 @@ describe('MovieRewardService', () => {
             }
         ];
 
-        mockMovieRewardRepository.getByRewardId.mockReturnValueOnce(expectedMovieRewards);
+        mockMovieRewardRepository.getByRewardId.mockReturnValueOnce(Promise.resolve(expectedMovieRewards));
 
         const result = await movieRewardService.getByRewardId(1);
 
@@ -92,7 +92,7 @@ describe('MovieRewardService', () => {
             }
         ];
 
-        mockMovieRewardRepository.getAll.mockReturnValueOnce(expectedMovieRewards);
+        mockMovieRewardRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovieRewards));
 
         const result = await movieRewardService.getAll();
 
@@ -111,7 +111,7 @@ describe('MovieRewardService', () => {
             ...movieRewardDto,
         };
 
-        mockMovieRewardRepository.add.mockReturnValueOnce(expectedMovieReward);
+        mockMovieRewardRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovieReward));
 
         const result = await movieRewardService.add(movieRewardDto);
 

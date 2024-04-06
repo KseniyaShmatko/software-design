@@ -3,7 +3,7 @@ import { AddMovieParticipantDto, UpdateMovieParticipantDto} from "./MoviePartici
 import { Repository } from "../IRepository";
 
 export interface MovieParticipantRepository extends Repository<MovieParticipant, AddMovieParticipantDto> {
-    getByMovieId(movie_id: number): MovieParticipant[];
-    getByParticipantId(participant_id: number): MovieParticipant[];
-    update(dto: UpdateMovieParticipantDto): MovieParticipant;
+    getByMovieId(movie_id: number): Promise<MovieParticipant[]>;
+    getByParticipantId(participant_id: number): Promise<MovieParticipant[]>;
+    update(dto: UpdateMovieParticipantDto, id: number): Promise<MovieParticipant>;
 }

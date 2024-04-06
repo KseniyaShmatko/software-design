@@ -1,7 +1,8 @@
 import { MovieStudioRepository } from "../../repositories/RelationRepository/IMovieStudioRepository";
+import { movieStudioRepositorySQL } from "../../repositories/RelationRepository/MovieStudioRepository";
 import { AddMovieStudioDto } from "../../repositories/RelationRepository/MovieStudioDto";
 
-export class MovieStudioService {
+class MovieStudioService {
     constructor (readonly movieStudioRepository: MovieStudioRepository ) {}
 
     async getById(id: number) {
@@ -58,3 +59,6 @@ export class MovieStudioService {
         }
     }
 };
+
+const movieStudioService = new MovieStudioService(movieStudioRepositorySQL);
+export { movieStudioService, MovieStudioService };

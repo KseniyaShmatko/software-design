@@ -26,7 +26,7 @@ describe('ParticipantRewardService', () => {
             reward_id: 1,
         };
 
-        mockParticipantRewardRepository.getById.mockReturnValueOnce(expectedParticipantReward);
+        mockParticipantRewardRepository.getById.mockReturnValueOnce(Promise.resolve(expectedParticipantReward));
 
         const result = await participantRewardService.getById(1);
 
@@ -48,7 +48,7 @@ describe('ParticipantRewardService', () => {
             }
         ];
 
-        mockParticipantRewardRepository.getByParticipantId.mockReturnValueOnce(expectedParticipantRewards);
+        mockParticipantRewardRepository.getByParticipantId.mockReturnValueOnce(Promise.resolve(expectedParticipantRewards));
 
         const result = await participantRewardService.getByParticipantId(1);
 
@@ -70,7 +70,7 @@ describe('ParticipantRewardService', () => {
             }
         ];
 
-        mockParticipantRewardRepository.getByRewardId.mockReturnValueOnce(expectedParticipantRewards);
+        mockParticipantRewardRepository.getByRewardId.mockReturnValueOnce(Promise.resolve(expectedParticipantRewards));
 
         const result = await participantRewardService.getByRewardId(1);
 
@@ -92,7 +92,7 @@ describe('ParticipantRewardService', () => {
             }
         ];
 
-        mockParticipantRewardRepository.getAll.mockReturnValueOnce(expectedParticipantRewards);
+        mockParticipantRewardRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedParticipantRewards));
 
         const result = await participantRewardService.getAll();
 
@@ -111,7 +111,7 @@ describe('ParticipantRewardService', () => {
             ...participantRewardDto,
         };
 
-        mockParticipantRewardRepository.add.mockReturnValueOnce(expectedParticipantReward);
+        mockParticipantRewardRepository.add.mockReturnValueOnce(Promise.resolve(expectedParticipantReward));
 
         const result = await participantRewardService.add(participantRewardDto);
 

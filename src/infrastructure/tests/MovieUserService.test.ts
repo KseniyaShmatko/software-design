@@ -28,7 +28,7 @@ describe('MovieUserService', () => {
             mark: true,
         };
 
-        mockMovieUserRepository.getById.mockReturnValueOnce(expectedMovieUser);
+        mockMovieUserRepository.getById.mockReturnValueOnce(Promise.resolve(expectedMovieUser));
 
         const result = await movieUserService.getById(1);
 
@@ -52,7 +52,7 @@ describe('MovieUserService', () => {
             }
         ];
 
-        mockMovieUserRepository.getByMovieId.mockReturnValueOnce(expectedMovieUsers);
+        mockMovieUserRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(expectedMovieUsers));
 
         const result = await movieUserService.getByMovieId(1);
 
@@ -76,7 +76,7 @@ describe('MovieUserService', () => {
             }
         ];
 
-        mockMovieUserRepository.getByUserId.mockReturnValueOnce(expectedMovieUsers);
+        mockMovieUserRepository.getByUserId.mockReturnValueOnce(Promise.resolve(expectedMovieUsers));
 
         const result = await movieUserService.getByUserId(1);
 
@@ -100,7 +100,7 @@ describe('MovieUserService', () => {
             }
         ];
 
-        mockMovieUserRepository.getAll.mockReturnValueOnce(expectedMovieUsers);
+        mockMovieUserRepository.getAll.mockReturnValueOnce(Promise.resolve(expectedMovieUsers));
 
         const result = await movieUserService.getAll();
 
@@ -120,7 +120,7 @@ describe('MovieUserService', () => {
             ...movieUserDto,
         };
 
-        mockMovieUserRepository.add.mockReturnValueOnce(expectedMovieUser);
+        mockMovieUserRepository.add.mockReturnValueOnce(Promise.resolve(expectedMovieUser));
 
         const result = await movieUserService.add(movieUserDto);
 
@@ -140,12 +140,12 @@ describe('MovieUserService', () => {
             mark: true,
         };
 
-        mockMovieUserRepository.update.mockReturnValueOnce(expectedUpdatedMovieUser);
+        mockMovieUserRepository.update.mockReturnValueOnce(Promise.resolve(expectedUpdatedMovieUser));
 
-        const result = await movieUserService.update(movieUserDto);
+        const result = await movieUserService.update(movieUserDto, expectedUpdatedMovieUser.id);
 
         expect(result).toEqual(expectedUpdatedMovieUser);
-        expect(mockMovieUserRepository.update).toHaveBeenCalledWith(movieUserDto);
+        expect(mockMovieUserRepository.update).toHaveBeenCalledWith(movieUserDto, expectedUpdatedMovieUser.id);
     });
 
     it('should delete a movieUser by id', async () => {
@@ -187,7 +187,7 @@ describe('MovieUserService', () => {
 
         const expectedMarks = 50;
 
-        mockMovieUserRepository.getByMovieId.mockReturnValueOnce(movieUsers);
+        mockMovieUserRepository.getByMovieId.mockReturnValueOnce(Promise.resolve(movieUsers));
 
         const result = await movieUserService.getMarks(movieId);
 
@@ -273,7 +273,7 @@ describe('MovieUserService Negative Tests', () => {
             throw new Error(errorMessage);
         });
 
-        const result = await movieUserService.update({ mark: true });
+        const result = await movieUserService.update({ mark: true }, 1);
 
         expect(result).toBeNull();
         expect(console.error).toHaveBeenCalledWith(`Error updating movieUser: Error: ${errorMessage}`);

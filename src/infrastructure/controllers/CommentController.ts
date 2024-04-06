@@ -28,7 +28,7 @@ class CommentController {
         }
     }
 
-    async getOneByMovieId(req: Request, res: Response, next: NextFunction) {
+    async getByMovieId(req: Request, res: Response, next: NextFunction) {
         try {
             const id = parseInt(req.params.id);
             const comment = await commentService.getByMovieId(id);
@@ -42,7 +42,7 @@ class CommentController {
         }
     }
 
-    async getOneByUserId(req: Request, res: Response, next: NextFunction) {
+    async getByUserId(req: Request, res: Response, next: NextFunction) {
         try {
             const id = parseInt(req.params.id);
             const comment = await commentService.getByUserId(id);
@@ -60,7 +60,7 @@ class CommentController {
         try {
             const { content, date, movie_id, user_id } = req.body;
             const dto = new CommentDto(content, date);
-            const dtoAdd = new AddCommentDto(dto,  movie_id, user_id);
+            const dtoAdd = new AddCommentDto(dto, movie_id, user_id);
             const comment = await commentService.add(dtoAdd);
             return res.json(comment);
         } catch (error) {

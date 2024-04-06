@@ -1,13 +1,14 @@
 import { Router } from "express";
 import participantController from "../controllers/ParticipantController";
+import { checkRoleHandling } from "../middleware/checkRoleMiddleware";
 
 const router = Router();
 
-router.post('/', participantController.create);
+router.post('/', checkRoleHandling('ADMIN'), participantController.create);
 router.get('/', participantController.getAll);
 router.get('/:id', participantController.getOneById);
 router.get('/:name/:surname', participantController.getOneByNameSurname);
-router.put('/:id', participantController.update);
-router.delete('/:id', participantController.delete);
+router.put('/:id', checkRoleHandling('ADMIN'), participantController.update);
+router.delete('/:id', checkRoleHandling('ADMIN'), participantController.delete);
 
 export default router;

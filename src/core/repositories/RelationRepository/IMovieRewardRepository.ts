@@ -3,6 +3,6 @@ import { AddMovieRewardDto } from "./MovieRewardDto";
 import { Repository } from "../IRepository";
 
 export interface MovieRewardRepository extends Repository<MovieReward, AddMovieRewardDto> {
-    getByMovieId(movie_id: number): MovieReward[];
-    getByRewardId(reward_id: number): MovieReward[];
+    getByMovieId(movie_id: number): Promise<MovieReward[]>;
+    getByRewardId(reward_id: number): Promise<MovieReward[]>;
 }

@@ -1,7 +1,8 @@
 import { ParticipantRewardRepository } from "../../repositories/RelationRepository/IParticipantRewardRepository";
+import { participantRewardRepositorySQL } from "../../repositories/RelationRepository/ParticipantRewardRepository";
 import { AddParticipantRewardDto } from "../../repositories/RelationRepository/ParticipantRewardDto";
 
-export class ParticipantRewardService {
+class ParticipantRewardService {
     constructor (readonly participantRewardRepository: ParticipantRewardRepository ) {}
 
     async getById(id: number) {
@@ -58,3 +59,6 @@ export class ParticipantRewardService {
         }
     }
 };
+
+const participantRewardService = new ParticipantRewardService(participantRewardRepositorySQL);
+export { participantRewardService, ParticipantRewardService };

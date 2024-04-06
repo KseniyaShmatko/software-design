@@ -1,9 +1,12 @@
 import { UserRepository } from "../../repositories/UserRepository/IUserRepository";
 import { AddUserDto, UpdateUserDto, UserDto } from "../../repositories/UserRepository/UserDto";
+import { userRepositorySQL } from "../../repositories/UserRepository/UserRepository";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+dotenv.config();
 
-export class UserService {
+class UserService {
     constructor (readonly userRepository: UserRepository ) {}
 
     async getById(id: number) {
@@ -42,10 +45,9 @@ export class UserService {
             const hashedPassword = await bcrypt.hash(dto.password, 10);
             const userDto = new UserDto(dto.name, dto.surname);
             const hashedUser: AddUserDto = new AddUserDto(userDto, dto.registration, dto.login, hashedPassword, dto.role);
-            const newUser = await this.userRepository.add(dto);
-            const token = this.generateJwt(newUser.id, dto.login, dto.role);
+            const newUser = await this.userRepository.add(hashedUser);
+            const token = this.generateJwt(newUser.id, newUser.login, newUser.role);
             return token;
-            
         } catch (error) {
             console.error(`Error registration user: ${error}`);
             return null;
@@ -64,17 +66,15 @@ export class UserService {
             }
             const token = this.generateJwt(user.id, user.login, user.role);
             return token;
-            
-            
         } catch (error) {
             console.error(`Error adding user: ${error}`);
             return null;
         }
     }
 
-    async update(dto: UpdateUserDto) {
+    async update(dto: UpdateUserDto, id: number) {
         try {
-            return await this.userRepository.update(dto);
+            return await this.userRepository.update(dto, id);
         } catch (error) {
             console.error(`Error updating user: ${error}`);
             return null;
@@ -89,9 +89,11 @@ export class UserService {
             return null;
         }
     }
-
     
     generateJwt(id: number, login: string, role: string) {
-        return jwt.sign({id, login, role}, 'key_for_password', {expiresIn: '24h'});
+        return jwt.sign({id, login, role}, process.env.SECRET_KEY as string, {expiresIn: '24h'});
     }
 };
+
+const userService = new UserService(userRepositorySQL);
+export { userService, UserService };
