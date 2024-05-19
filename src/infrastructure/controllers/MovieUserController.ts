@@ -93,6 +93,17 @@ class MovieUserController {
             return next(ApiError.internal("Failed to delete movieUser"));
         }
     }
+
+    async getMarks(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = parseInt(req.params.id);
+            const marks = await movieUserService.getMarks(id);
+            return res.json(marks);
+        } catch (error) {
+            console.error("Error occurred while getting marks for movie:", error);
+            return next(ApiError.internal("Failed to get marks for movie"));
+        }
+    }
 }
 
 export default new MovieUserController();

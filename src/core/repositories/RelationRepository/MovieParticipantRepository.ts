@@ -81,7 +81,7 @@ class MovieParticipantRepositorySQL implements MovieParticipantRepository {
 
     async getByParticipantId(id: number): Promise<MovieParticipant[]> {
         try {
-            const movieParticipantsModels = await MovieParticipantDB.findAll({ where: { movieParticipant_id: id } });
+            const movieParticipantsModels = await MovieParticipantDB.findAll({ where: { participant_id: id } });
             const movieParticipantsData = movieParticipantsModels.map(movieParticipantModel => movieParticipantModel.toJSON());
             const movieParticipants = movieParticipantsData.map(movieParticipantData => new MovieParticipant(movieParticipantData.id, movieParticipantData.movie_id, movieParticipantData.participant_id, movieParticipantData.role));
             return movieParticipants;

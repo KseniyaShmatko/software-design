@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize");
 const CommentDB = sequelize.define('comment',
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    content: { type: DataTypes.STRING, allowNull: false },
+    content: { type: DataTypes.TEXT, allowNull: false },
     date: { type: DataTypes.DATE, allowNull: false },
     movie_id: { type: DataTypes.INTEGER, allowNull: false, references: { model: 'movies', key: 'id' }},
     user_id: { type: DataTypes.INTEGER, allowNull: false , references: { model: 'users', key: 'id' }}
@@ -21,11 +21,11 @@ const GenreDB = sequelize.define('genre',
 const MovieDB = sequelize.define('movie',
   { id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, 
     name: { type: DataTypes.STRING, allowNull: false, unique: true }, 
-    description: { type: DataTypes.STRING, allowNull: false }, 
+    description: { type: DataTypes.TEXT, allowNull: false }, 
     country: { type: DataTypes.STRING, allowNull: false }, 
     release: { type: DataTypes.DATE, allowNull: false }, 
-    photo: { type: DataTypes.STRING, allowNull: false }, 
-    trailer: { type: DataTypes.STRING, allowNull: false } 
+    photo: { type: DataTypes.TEXT, allowNull: false }, 
+    trailer: { type: DataTypes.TEXT, allowNull: false } 
   }
 );
 
@@ -35,7 +35,7 @@ const ParticipantDB = sequelize.define ('participant',
     surname: { type: DataTypes.STRING, allowNull: false }, 
     birth: { type: DataTypes.DATE, allowNull: false }, 
     death: { type: DataTypes.DATE, allowNull: true }, 
-    photo: { type: DataTypes.STRING, allowNull: false } 
+    photo: { type: DataTypes.TEXT, allowNull: false } 
   },
   { indexes: [
     {
@@ -49,7 +49,7 @@ const RewardDB = sequelize.define('reward',
   { id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, 
     name: { type: DataTypes.STRING, allowNull: false, unique: true }, 
     description: { type: DataTypes.STRING, allowNull: false }, 
-    photo: { type: DataTypes.STRING, allowNull: false } 
+    photo: { type: DataTypes.TEXT, allowNull: false } 
   }
 );
 
@@ -59,7 +59,7 @@ const StudioDB = sequelize.define('studio',
     founder: { type: DataTypes.STRING, allowNull: false }, 
     country: { type: DataTypes.STRING, allowNull: false }, 
     foundation: { type: DataTypes.DATE, allowNull: false }, 
-    photo: { type: DataTypes.STRING, allowNull: false } 
+    photo: { type: DataTypes.TEXT, allowNull: false } 
   }
 );
 

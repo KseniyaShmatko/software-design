@@ -1,0 +1,101 @@
+.auth-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100svw;
+    background: repeat center center url('../../public/authback.jpg');
+    background-size: contain;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100svw;
+    background: repeat center center url('../../public/authback.jpg');
+    background-size: contain;
+    height: calc(100svh - 62px);
+}
+
+
+.card {
+    width: 35vw;
+    padding: 3vw 5vw 1vw 5vw;
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-h2 {
+    margin: auto;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+
+.control-input {
+    margin-top: 20px;
+
+    font-size: 1.5rem;
+}
+
+.auth-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 15vh;
+}
+
+.auth-form-button {
+    align-self: end;
+    font-size: 20px !important;
+}
+
+.auth-p {
+    font-size: 16px;
+}
+
+.auth-navlink,
+.auth-navlink:hover,
+.auth-navlink:focus {
+    color: #16b3d6;
+}
+
+@media screen and (max-width: 1005px){
+    .card {
+        width: 45vw;
+    }
+
+}
+
+@media screen and (max-width: 840px){
+    .card {
+        width: 50vw;
+    }
+
+}
+
+@media screen and (max-width: 660px){
+    .card {
+        width: 70vw;
+    }
+    .auth-form-button {
+        align-self: end;
+        font-size: 14px !important;
+    }
+    
+}
+
+
+@media screen and (max-width: 500px){
+    .card-h2 {
+        font-size: 20px;
+    }
+    .auth-row {
+        padding-top: 15px;
+    }
+}

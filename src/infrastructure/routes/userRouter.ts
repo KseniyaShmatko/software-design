@@ -8,7 +8,7 @@ const router = Router();
 router.post('/', userController.registration);
 router.get('/', checkRoleHandling('ADMIN'), userController.getAll);
 router.get('/id/:id', userController.getOneById);
-router.get('/auth/', authHandling, userController.check);
+router.get('/auth', authHandling, userController.check);
 router.post('/login', userController.login);
 router.put('/:id', userController.update);
 router.delete('/:id', checkRoleHandling('ADMIN'), userController.delete);

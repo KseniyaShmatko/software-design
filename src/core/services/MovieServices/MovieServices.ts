@@ -1,24 +1,27 @@
 import { MovieRepository, MovieCategories } from "../../repositories/MovieRepository/IMovieRepository";
 import { movieRepositorySQL } from "../../repositories/MovieRepository/MovieRepository";
 import { AddMovieDto, UpdateMovieDto } from "../../repositories/MovieRepository/MovieDto";
+import logger from '../../logger';
 
 class MovieService {
     constructor (readonly movieRepository: MovieRepository) {};
 
     async getById(id: number) {
         try {
+            logger.info(`Getting movie by id: ${id}`, 'MovieService');
             return await this.movieRepository.getById(id);
         } catch (error) {
-            console.error(`Error getting movie by id: ${error}`);
+            logger.error(`Error getting movie by id: ${error}`, 'MovieService');
             return null;
         }
     }
 
     async getByName(name: string) {
         try {
+            logger.info(`Getting movie by name: ${name}`, 'MovieService');
             return await this.movieRepository.getByName(name);
         } catch (error) {
-            console.error(`Error getting movie by name: ${error}`);
+            logger.error(`Error getting movie by name: ${error}`, 'MovieService');
             return null;
         }
     }
@@ -53,37 +56,40 @@ class MovieService {
                     movieCategories.other.push(movie);
                 }
             });
-
+            logger.info(`Getting all movies`, 'MovieService');
             return movieCategories;
         } catch (error) {
-            console.error(`Error getting all movies: ${error}`);
+            logger.error(`Error getting all movies: ${error}`, 'MovieService');
             return null;
         }
     }
 
     async add(dto: AddMovieDto) {
         try {
+            logger.info(`Adding movie`, 'MovieService');
             return await this.movieRepository.add(dto);
         } catch (error) {
-            console.error(`Error adding movie: ${error}`);
+            logger.error(`Error adding movie: ${error}`, 'MovieService');
             return null;
         }
     }
 
     async update(dto: UpdateMovieDto, id: number) {
         try {
+            logger.info(`Updating movie: ${id}`, 'MovieService');
             return await this.movieRepository.update(dto, id);
         } catch (error) {
-            console.error(`Error updating movie: ${error}`);
+            logger.error(`Error updating movie: ${error}`, 'MovieService');
             return null;
         }
     }
 
     async delete(id: number) {
         try {
+            logger.info(`Deleting movie: ${id}`, 'MovieService');
             await this.movieRepository.delete(id);
         } catch (error) {
-            console.error(`Error deleting movie: ${error}`);
+            logger.error(`Error deleting movie: ${error}`, 'MovieService');
             return null;
         }
     }
