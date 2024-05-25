@@ -79,9 +79,34 @@ class MovieUserRepositorySQL implements MovieUserRepository {
         }
     }
 
+    // async getMark(id: number): Promise<number | null> {
+    //     try {
+    //         if (!MovieUserDB.sequelize) {
+    //             throw new Error('Sequelize instance is not initialized');
+    //         }
+    
+    //         const [result]: [any[], any] = await MovieUserDB.sequelize.query(
+    //             `SELECT 
+    //                 (COUNT(*) FILTER (WHERE mark = TRUE) * 100) / COUNT(*) AS positive_percentage
+    //             FROM 
+    //                 movie_users
+    //             WHERE
+    //                 movie_id = :id`, {
+    //             replacements: { id },
+    //             type: 'SELECT' // Указываем тип запроса
+    //         });
+    //         console.log(result);
+    //         const positivePercentage: number = parseInt(result?.[0]?.positive_percentage) ?? null;
+    //         return positivePercentage;
+    //     } catch (error) {
+    //         console.error("Error occurred while getting movieUsers by movie ID:", error);
+    //         throw new Error("Failed to get movieUsers by movie ID");
+    //     }
+    // }
+
     async getByUserId(id: number): Promise<MovieUser[]> {
         try {
-            const movieUsersModels = await MovieUserDB.findAll({ where: { movieUser_id: id } });
+            const movieUsersModels = await MovieUserDB.findAll({ where: { user_id: id } });
             const movieUsersData = movieUsersModels.map(movieUserModel => movieUserModel.toJSON());
             const movieUsers = movieUsersData.map(movieUserData => new MovieUser(movieUserData.id, movieUserData.movie_id, movieUserData.user_id, movieUserData.mark));
             return movieUsers;

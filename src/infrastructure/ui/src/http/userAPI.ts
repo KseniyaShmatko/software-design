@@ -41,3 +41,9 @@ export const postMarkMovie = async (movie_id:number, user_id:number, mark:boolea
     const {data} = await $authHost.post('/movieuser/', {movie_id, user_id, mark});
     return data;
 }; 
+
+export const getMarkByUser = async (user_id:number) => {
+    const {data} = await $authHost.get('/movieuser/user/' + user_id);
+    console.log(data)
+    return data;
+}; 

@@ -11,11 +11,11 @@ import Form from 'react-bootstrap/Form';
 import { useParams } from 'react-router-dom';
 import { getOneMovie, getParticipantsByMovie, getGenresByMovie, getStudiosByMovie, getRewardsByMovie, getCommentsByMovie, getMarksMovie, postComment } from '../http/movieAPI';
 import { getOneParticipant } from '../http/participantAPI';
-import { MovieType, ParticipantType, GenreType, StudioType, RewardType, CommentType } from "../utils/types";
+import { MovieType, ParticipantType, GenreType, StudioType, RewardType, CommentType, RatingType } from "../utils/types";
 import { getOneGenre } from '../http/genreAPI';
 import { getOneStudio } from '../http/studioAPI';
 import { getOneReward } from '../http/rewardAPI';
-import { getOneUser, postMarkMovie } from '../http/userAPI';
+import { getMarkByUser, getOneUser, postMarkMovie } from '../http/userAPI';
 import { Context } from '../index';
 
 export interface ExtendedParticipantType extends ParticipantType {
@@ -178,13 +178,28 @@ const Movie = () => {
     const {rewards} = useMovieReward(id);
     const {comments} = useMovieComments(id);
     const [content, setContent] = useState('');
+    const [rating, setRating] = useState<boolean | undefined>(undefined);
+
     useEffect(() => {
         if (id) {
             const movieId = parseInt(id);
             getOneMovie(movieId).then(data => setMovie(data));
             getMarksMovie(movieId).then(data => setMarks(data));
+            console.log(user._isAuth, user._user.id);
+            if(user._isAuth && user._user.id !== undefined) {
+                console.log(user._user.id)
+                getMarkByUser(user._user.id).then((data: RatingType[]) => {
+                    console.log('Marks data:', data); 
+                    const movieId = parseInt(id);
+                    const movieMark = data.find((mark: RatingType) => mark.movie_id === movieId);
+                    console.log(movieMark)
+                    if (movieMark !== undefined) {
+                        setRating(movieMark.mark);
+                    }
+                })
+            }
         }
-    }, [id]); 
+    }, [id, user._user.id]); 
 
     const directorLinks = directors.map((director, index) => (
         <span key={index}>
@@ -232,12 +247,19 @@ const Movie = () => {
     ));
 
     function clickRate(mark: boolean) {
-        if(!user._isAuth) {
-            alert("Чтобы оценить трейлер нужно зарегистрироваться")
+        if (!user._isAuth) {
+            alert("Чтобы оценить трейлер нужно зарегистрироваться");
+            return;
         }
         if (id) {
+            if(rating === true || rating === false) {
+                alert("Вы уже дали оценку");
+                return;
+            }
             const movieId = parseInt(id);
-            postMarkMovie(movieId, user._user.id, mark);
+            postMarkMovie(movieId, user._user.id, mark).then(() => {
+                setRating(mark);
+            })
         }
     }
 
@@ -281,9 +303,9 @@ const Movie = () => {
                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
             <div className='div-rating'>
-                <h3 className='h3-rate'>Рейтинг ожидания <span>{marks + '%'}</span></h3>
-                <Button variant="outline-success" onClick={() => clickRate(true)} className='div-button'>Жду</Button>
-                <Button variant="outline-danger" onClick={() => clickRate(false)} className='div-button'>Не жду</Button>
+                <h3 className='h3-rate'>Рейтинг ожидания <span>{Math.round(+marks) + '%'}</span></h3>
+                <Button variant="outline-success" onClick={() => clickRate(true)} className='div-button' style={{ boxShadow: rating === true ? '3px 3px 5px green' : '' }}>Жду</Button>
+                <Button variant="outline-danger" onClick={() => clickRate(false)} className='div-button' style={{ boxShadow: rating === false ? '3px 3px 5px red' : '' }}>Не жду</Button>
             </div>  
             <div className='comments'>
                 <h3 className='h2-name comment-name'>Комментарии</h3>

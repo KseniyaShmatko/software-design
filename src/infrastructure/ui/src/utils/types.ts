@@ -45,7 +45,13 @@ export interface CommentType {
     date: Date;
     movie_id: number;
     user_id: number;
+}
 
+export interface RatingType {
+    id: number;
+    movie_id: number;
+    user_id: number;
+    mark: boolean;
 }
 
 export interface UserType {

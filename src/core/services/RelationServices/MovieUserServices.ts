@@ -76,6 +76,29 @@ class MovieUserService {
         }
     }
 
+    // async getMarks(id: number) {
+    //     try {
+
+    //         // const averageRating = await this.movieUserRepository.getMark(id);
+    //         // if (averageRating === null) {
+    //         //     return null;
+    //         // }
+    //         // const waitingPercentage = averageRating * 100;
+    //         // logger.info(`Getting marks movie: ${id}`, 'MovieUserService');
+    //         // return waitingPercentage;
+    //         // const movieUsers = await this.movieUserRepository.getByMovieId(id);
+
+    //         // if (!movieUsers || movieUsers.length === 0) {
+    //         //     return null;
+    //         // }
+    //         // return movieUsers;
+            
+    //     } catch (error) {
+    //         logger.error(`Error getting marks movie: ${error}`, 'MovieUserService');
+    //         return null;
+    //     }
+    // }
+
     async getMarks(id: number) {
         try {
             const movieUsers = await this.movieUserRepository.getByMovieId(id);

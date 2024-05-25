@@ -43,3 +43,24 @@
 {"level":"error","message":"Error adding movieUser: Error: Failed to add movieUser","service":"MovieUserService","timestamp":"2024-05-17T23:34:05.517Z"}
 {"level":"error","message":"Error adding movieUser: Error: Failed to add movieUser","service":"MovieUserService","timestamp":"2024-05-17T23:37:35.561Z"}
 {"level":"error","message":"Error adding movieUser: Error: Failed to add movieUser","service":"MovieUserService","timestamp":"2024-05-17T23:38:30.248Z"}
+{"level":"error","message":"Error registration user: Error: Such user already exists","service":"UserService","timestamp":"2024-05-25T14:22:03.334Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T14:44:46.239Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T14:45:12.105Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T14:45:15.777Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T14:45:18.690Z"}
+{"level":"error","message":"Error getting movieUser by id: Error: Failed to get movieUser by ID","service":"MovieUserService","timestamp":"2024-05-25T15:08:37.117Z"}
+{"level":"error","message":"Error getting movieUser by id: Error: Failed to get movieUser by ID","service":"MovieUserService","timestamp":"2024-05-25T15:08:37.131Z"}
+{"level":"error","message":"Error getting movieUser by id: Error: Failed to get movieUser by ID","service":"MovieUserService","timestamp":"2024-05-25T15:10:00.336Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:18:07.876Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:18:07.919Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:21:54.381Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:21:54.401Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:25:35.406Z"}
+{"level":"error","message":"Error getting movieUsers by user_id: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:25:35.470Z"}
+{"level":"error","message":"Error adding movieUser: Error: Failed to add movieUser","service":"MovieUserService","timestamp":"2024-05-25T15:26:09.664Z"}
+{"level":"error","message":"Error adding movieUser: Error: Failed to add movieUser","service":"MovieUserService","timestamp":"2024-05-25T15:26:45.087Z"}
+{"level":"error","message":"Error getting marks movie: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:31:10.212Z"}
+{"level":"error","message":"Error getting marks movie: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T15:52:38.247Z"}
+{"level":"error","message":"Error getting marks movie: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T16:04:50.504Z"}
+{"level":"error","message":"Error getting marks movie: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T16:05:44.276Z"}
+{"level":"error","message":"Error getting marks movie: Error: Failed to get movieUsers by movie ID","service":"MovieUserService","timestamp":"2024-05-25T16:07:10.509Z"}

@@ -1,4 +1,5 @@
 import { $authHost, $host } from "./index";   
+// import { RatingType } from "../utils/types";
 
 export const getMovies = async ( ) => {
     const {data} = await $host.get('movie/');
@@ -41,7 +42,13 @@ export const getCommentsByMovie = async (id:number) => {
 }; 
 
 export const getMarksMovie = async (id:number) => {
+    // const startTime = performance.now();
     const {data} = await $host.get('/movieuser/marks/' + id);
+    // const waitingCount = data.filter((movieUser:RatingType ) => movieUser.mark).length;
+    // const totalCount = data.length;
+    // const waitingPercentage = (waitingCount / totalCount) * 100;
+    // const endTime = performance.now();
+    // console.log(endTime - startTime);
     return data;
 }; 
 
